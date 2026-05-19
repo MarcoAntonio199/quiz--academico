@@ -3,6 +3,9 @@ import produtoRoutes from "./routes/produtoRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import { pool } from "./config/database.js";
 import path from "path";
+import quizRoutes from "./routes/quizRoutes.js";
+import pontuacaoRoutes from "./routes/pontuacaoRoutes.js";
+import rankingRoutes from "./routes/rankingRoutes.js";
 
 const app = express();
 
@@ -55,5 +58,8 @@ app.get("/trocarSenha", (req, res) => {
 // ROTAS
 app.use("/api", produtoRoutes);
 app.use("/", userRoutes);
+app.use("/", quizRoutes);
+app.use("/", pontuacaoRoutes);
+app.use("/", rankingRoutes);
 
 const PORT = process.env.PORT || 3000;

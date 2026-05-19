@@ -83,3 +83,23 @@ function restartQuiz(){
     // Mostra tela inicial
     document.getElementById('startScreen').style.display = 'block';
 }
+function verificarInsignia(pontos) {
+
+    if (pontos >= 200) {
+        return "Mestre";
+    }
+
+    if (pontos >= 150) {
+        return "Ouro";
+    }
+
+    if (pontos >= 100) {
+        return "Prata";
+    }
+
+    if (pontos >= 50) {
+        return "Bronze";
+    }
+
+    return "Iniciante";
+}

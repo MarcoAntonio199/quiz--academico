@@ -122,7 +122,7 @@ function mostrarPergunta() {
         perguntas[perguntaAtual];
 
     numeroPergunta.innerText =
-        `Pergunta ${perguntaAtual + 1}`;
+        `Pergunta ${perguntaAtual + 1}/ ${perguntas.length}`;
 
     tituloPergunta.innerText =
         pergunta.pergunta;
@@ -155,31 +155,8 @@ function mostrarPergunta() {
 // PRÓXIMA PERGUNTA
 // ===============================
 
+
 function proximaPergunta() {
-
-    const respostaSelecionada =
-        document.querySelector(
-            'input[name="answer"]:checked'
-        );
-
-    if (!respostaSelecionada) {
-
-        alert(
-            "Selecione uma alternativa"
-        );
-
-        return;
-    }
-
-    const acertou =
-        respostaSelecionada.value == "1";
-
-    if (acertou) {
-
-        pontuacao +=
-            perguntas[perguntaAtual]
-            .pontuacao;
-    }
 
     perguntaAtual++;
 
@@ -195,6 +172,66 @@ function proximaPergunta() {
         mostrarResultado();
     }
 }
+
+function responder() {
+
+    const respostaSelecionada =
+        document.querySelector(
+            'input[name="answer"]:checked'
+        );
+
+    if (!respostaSelecionada) {
+
+        alert(
+            "Selecione uma alternativa"
+        );
+
+        return;
+    }
+
+    const alternativas =
+        document.querySelectorAll(
+            '.option'
+        );
+
+    alternativas.forEach((label) => {
+
+        const radio =
+            label.querySelector(
+                'input'
+            );
+
+        if (radio.value == "1") {
+
+            label.style.backgroundColor =
+                "#4CAF50";
+
+            label.style.color =
+                "white";
+
+        } else {
+
+            label.style.backgroundColor =
+                "#f44336";
+
+            label.style.color =
+                "white";
+        }
+
+        radio.disabled = true;
+    });
+
+    const acertou =
+        respostaSelecionada.value == "1";
+
+    if (acertou) {
+
+        pontuacao +=
+            perguntas[perguntaAtual]
+            .pontuacao;
+    }
+}
+
 
 
 // ===============================

@@ -7,6 +7,7 @@ import pageRoutes from "./routes/pageRoutes.js"
 import pontuacaoRoutes from "./routes/pontuacaoRoutes.js";
 import rankingRoutes from "./routes/rankingRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
+import moduloRoutes from "./routes/moduloRoutes.js";
 
 import { pool } from "./config/database.js";
 
@@ -32,6 +33,7 @@ app.use("/api/users", userRoutes);
  app.use("/api/quiz", quizRoutes);
 app.use("/api/pontuacao", pontuacaoRoutes);
 app.use("/api/ranking", rankingRoutes);
+app.use("/modulo", moduloRoutes);
 
 // porta
 

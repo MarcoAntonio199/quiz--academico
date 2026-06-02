@@ -15,18 +15,23 @@ router.get("/login.html", (req, res) => {
 });
 
 // Cadastro
-router.get("./../views/cadastro", (req, res) => {
+router.get("/cadastro.html", (req, res) => {
   res.sendFile(path.join(process.cwd(), "cadastro.html"));
 });
 
 // Redefinir senha
-router.get("./../views/redefinir.htmL", (req, res) => {
+router.get("/redefinir.html", (req, res) => {
   res.sendFile(path.join(process.cwd(), "redefinir.html"));
 });
 
 // Trocar senha
 router.get("./../views/trocarSenha.html", (req, res) => {
   res.sendFile(path.join(process.cwd(), "trocarSenha.html"));
+});
+
+// Disciplinas do módulo
+router.get("/disciplinas.html", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "views/disciplinas.html"));
 });
 
 // Trocar senha

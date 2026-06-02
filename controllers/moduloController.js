@@ -79,6 +79,21 @@ export async function getInfoModulo(req, res) {
     }
 }
 
+export async function getDisciplinasPage(req, res) {
+    try {
+        const { id } = req.params;
+
+        if (!id || id < 1 || id > 3) {
+            return res.status(400).send("ID de módulo inválido");
+        }
+
+        res.sendFile(path.join(process.cwd(), "views/disciplinas.html"));
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ erro: "Erro ao carregar a página de disciplinas" });
+    }
+}
+
 export async function getTodosModulos(req, res) {
     try {
         const modulos = await buscarTodosModulos();

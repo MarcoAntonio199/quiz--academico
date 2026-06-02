@@ -6,6 +6,16 @@ let pontuacao = 0;
 
 
 // ===============================
+// OBTER PARÂMETRO DA URL
+// ===============================
+
+function obterParametroURL(nome) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(nome);
+}
+
+
+// ===============================
 // CARREGAR PERGUNTAS
 // ===============================
 
@@ -13,8 +23,11 @@ async function carregarPerguntas() {
 
     try {
 
+        // Obtém a disciplina da URL, ou usa 1 como padrão
+        const disciplinaId = obterParametroURL('disciplina') || 1;
+
         const response = await fetch(
-            "http://localhost:3000/api/quiz/perguntas/1"
+            `http://localhost:3000/api/quiz/perguntas/${disciplinaId}`
         );
 
         if (!response.ok) {

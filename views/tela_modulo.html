@@ -48,14 +48,13 @@
   </div>
 
   <script>
-    // Liga os cartões para navegar para a rota do módulo.
-    // Mantive IDs e data-attributes para integrar com o backend existente.
+    // Liga os cartões para navegar para a tela de disciplinas
     document.querySelectorAll('.module-card').forEach(card => {
       card.addEventListener('click', () => {
-        const id = card.getAttribute('data-module-id');
+        const moduloId = card.getAttribute('data-module-id');
 
-        // ajustar a rota abaixo conforme o padrão do backend se necessário.
-        window.location.href = `/modulo/${id}`;
+// Redireciona para a rota de disciplinas do módulo selecionado
+    window.location.href = `/modulo/disciplinas/${moduloId}`;
       });
     });
 

@@ -31,7 +31,7 @@ router.get("./../views/trocarSenha.html", (req, res) => {
 
 // Trocar senha
 router.get("/quiz", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "quiz.html"));
+  res.sendFile(path.join(process.cwd(), "login.html"));
 });
 
 router.post("/login", async (req, res) => {

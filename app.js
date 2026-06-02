@@ -7,6 +7,7 @@ import pageRoutes from "./routes/pageRoutes.js"
 import pontuacaoRoutes from "./routes/pontuacaoRoutes.js";
 import rankingRoutes from "./routes/rankingRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
+import moduloRoutes from "./routes/moduloRoutes.js";
 
 import { pool } from "./config/database.js";
 
@@ -24,11 +25,6 @@ app.use("/css", express.static(path.join(process.cwd(), "css")));
 app.use("/imgs", express.static(path.join(process.cwd(), "public/imgs")));
 app.use("/js", express.static(path.join(process.cwd(), "public/js")));
 
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "views", "quiz.html"));
-});
-
 // // Rotas
 
 app.use("/api/users", userRoutes);
@@ -37,6 +33,7 @@ app.use("/api/users", userRoutes);
  app.use("/api/quiz", quizRoutes);
 app.use("/api/pontuacao", pontuacaoRoutes);
 app.use("/api/ranking", rankingRoutes);
+app.use("/modulo", moduloRoutes);
 
 // porta
 

@@ -1718,7 +1718,8 @@ BEGIN
         SELECT 'Usuário cadastrado com sucesso!' AS mensagem;
     END IF;
 
-END // CREATE PROCEDURE AtualizarQuiz(IN p_id INT, IN p_pontuacao INT) BEGIN
+END;
+CREATE PROCEDURE AtualizarQuiz(IN p_id INT, IN p_pontuacao INT) BEGIN
 UPDATE
     quiz
 SET
@@ -1850,4 +1851,3 @@ FROM
 ORDER BY
     pontuacao DESC;
 END // DELIMITER //
-

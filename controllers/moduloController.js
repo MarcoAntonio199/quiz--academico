@@ -10,6 +10,30 @@ export async function getTelaMudulo(req, res) {
     }
 }
 
+export async function getModuloById(req, res) {
+    try {
+        const { id } = req.params;
+
+        if (!id || id < 1 || id > 3) {
+            return res.status(400).json({ erro: "ID de módulo inválido" });
+        }
+
+        const disciplinas = await buscarDisciplinasPorModulo(id);
+
+        if (disciplinas.length === 0) {
+            return res.status(404).json({ erro: "Nenhuma disciplina encontrada para este módulo" });
+        }
+
+        res.status(200).json({
+            modulo: id,
+            disciplinas: disciplinas
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ erro: "Erro ao buscar módulo" });
+    }
+}
+
 export async function getDisciplinasPorModulo(req, res) {
     try {
         const { id } = req.params;

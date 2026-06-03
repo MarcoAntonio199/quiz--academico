@@ -19,7 +19,7 @@
 
     <h1>Desenvolvimento de Sistemas</h1>
 
-    <p style="margin-bottom:10px;">Selecione um módulo para começar</p>
+    <p id="boasVindas" style="margin-bottom:10px;"></p>
 
     <div class="modules-grid">
 
@@ -48,6 +48,16 @@
   </div>
 
   <script>
+    // Exibe o nome do usuário logado
+    const nomeUsuario = localStorage.getItem('usuario');
+    const boasVindas = document.getElementById('boasVindas');
+
+    if (nomeUsuario) {
+      boasVindas.textContent = `Bem-vindo, ${nomeUsuario}! Selecione um módulo para começar`;
+    } else {
+      boasVindas.textContent = 'Selecione um módulo para começar';
+    }
+
     // Liga os cartões para navegar para a tela de disciplinas
     document.querySelectorAll('.module-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -64,6 +74,7 @@
     });
   </script>
 
+  <script src="/js/header.js"></script>
 </body>
 
 </html>

@@ -274,8 +274,7 @@ function mostrarResultado() {
 
 async function salvarPontuacao() {
 
-    const nome =
-        prompt("Digite seu nome");
+    const nome = localStorage.getItem("usuario");
 
     try {
 
@@ -291,11 +290,9 @@ async function salvarPontuacao() {
                 },
 
                 body: JSON.stringify({
-
-                    nome,
-
-                    pontos: pontuacao
-                })
+    nome: nome,
+    pontos: pontuacao
+})
             }
         );
 

@@ -219,19 +219,17 @@ function responder() {
             label.style.backgroundColor =
                 "#4CAF50";
 
-            label.style.color =
-                "white";
+            
 
         } else {
 
             label.style.backgroundColor =
                 "#f44336";
 
-            label.style.color =
-                "white";
+            
         }
 
-        radio.disabled = true;
+        radio.disabled = false;
     });
 
     const acertou =
@@ -318,13 +316,8 @@ function restartQuiz() {
 
     pontuacao = 0;
 
-    document.getElementById(
-        "resultScreen"
-    ).style.display = "none";
-
-    document.getElementById(
-        "startScreen"
-    ).style.display = "block";
+    window.location.href = "/modulo";
+    
 }
 
 

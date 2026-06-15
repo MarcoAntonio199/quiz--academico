@@ -49,6 +49,9 @@ async function carregarPerguntas() {
         // Seleciona 5 perguntas rotativas por disciplina usando localStorage
         perguntas = selecionarPerguntasRotativas(todas, disciplinaId, 5);
 
+        // DEBUG: mostra no console as perguntas selecionadas (ids)
+        console.log('Perguntas selecionadas (ids):', perguntas.map(p => p.id));
+
     } catch (error) {
 
         console.log(error);

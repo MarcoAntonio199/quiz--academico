@@ -70,7 +70,12 @@ router.post("/login", async (req, res) => {
 
     // login OK
     return res.status(200).json({
-      success: true
+      success: true,
+      usuario: {
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email
+      }
     });
 
   } catch (erro) {

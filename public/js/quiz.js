@@ -1,8 +1,11 @@
+
 let perguntas = [];
 
 let perguntaAtual = 0;
 
 let pontuacao = 0;
+
+let disciplinaAtualId = null;
 
 
 // ===============================
@@ -25,6 +28,7 @@ async function carregarPerguntas() {
 
         // Obtém a disciplina da URL, ou usa 1 como padrão
         const disciplinaId = obterParametroURL('disciplina') || 1;
+        disciplinaAtualId = disciplinaId;
 
         const response = await fetch(
             `http://localhost:3000/api/quiz/perguntas/${disciplinaId}`
@@ -37,11 +41,15 @@ async function carregarPerguntas() {
             );
         }
 
-        const dados =
-            await response.json();
+        const dados = await response.json();
 
-        perguntas =
-            organizarPerguntas(dados);
+        const todas = organizarPerguntas(dados);
+
+        // Seleciona 5 perguntas rotativas por disciplina usando localStorage
+        perguntas = selecionarPerguntasRotativas(todas, disciplinaId, 5);
+
+        // DEBUG: mostra no console as perguntas selecionadas (ids)
+        console.log('Perguntas selecionadas (ids):', perguntas.map(p => p.id));
 
     } catch (error) {
 
@@ -264,6 +272,9 @@ function mostrarResultado() {
     ).innerText =
         `${pontuacao} pontos`;
 
+    // incrementa rotação para próxima vez que entrar nessa disciplina
+    incrementarRotacao(disciplinaAtualId, perguntas.length);
+
     salvarPontuacao();
 }
 
@@ -304,17 +315,67 @@ async function salvarPontuacao() {
 
 
 // ===============================
+// ROTINA DE ROTAÇÃO DE PERGUNTAS
+// ===============================
+
+function selecionarPerguntasRotativas(todasPerguntas, disciplinaId, limite) {
+    if (!Array.isArray(todasPerguntas) || todasPerguntas.length === 0) return [];
+
+    // garante ordem estável: ordena por `id` caso exista
+    const perguntasUnicas = todasPerguntas.slice().sort((a, b) => {
+        if (a.id != null && b.id != null) return a.id - b.id;
+        return 0;
+    });
+
+    const N = perguntasUnicas.length;
+
+    if (N <= limite) {
+        return perguntasUnicas.slice(0, limite);
+    }
+
+    const chave = `rotacao_disciplina_${disciplinaId}`;
+    let indice = parseInt(localStorage.getItem(chave) || '0', 10);
+    if (isNaN(indice) || indice < 0) indice = 0;
+
+    const selecionadas = [];
+    for (let i = 0; i < limite; i++) {
+        const idx = (indice + i) % N;
+        selecionadas.push(perguntasUnicas[idx]);
+    }
+
+    return selecionadas;
+}
+
+function incrementarRotacao(disciplinaId, usadasCount) {
+    if (!disciplinaId) return;
+    const chave = `rotacao_disciplina_${disciplinaId}`;
+    let indice = parseInt(localStorage.getItem(chave) || '0', 10);
+    if (isNaN(indice) || indice < 0) indice = 0;
+
+    const incremento = usadasCount || 5;
+    const novo = indice + incremento;
+    localStorage.setItem(chave, String(novo));
+}
+
+
+// ===============================
 // REINICIAR QUIZ
 // ===============================
 
-function restartQuiz() {
+async function restartQuiz() {
 
     perguntaAtual = 0;
 
     pontuacao = 0;
 
-    window.location.href = "/modulo";
-    
+    // Esconde a tela de resultado
+    document.getElementById("resultScreen").style.display = "none";
+
+    // Recarrega as próximas perguntas (a rotação já é incrementada em mostrarResultado)
+    await carregarPerguntas();
+
+    // Inicia o quiz imediatamente com o novo conjunto
+    startQuiz();
 }
 
 

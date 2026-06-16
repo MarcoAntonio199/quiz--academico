@@ -27,7 +27,6 @@ async function carregarPerguntas() {
     try {
 
         // Obtém a disciplina da URL, ou usa 1 como padrão
-
         const disciplinaId = obterParametroURL('disciplina') || 1;
         disciplinaAtualId = disciplinaId;
 
@@ -331,19 +330,20 @@ function incrementarRotacao(disciplinaId, usadasCount) {
 // REINICIAR QUIZ
 // ===============================
 
-function restartQuiz() {
+async function restartQuiz() {
 
     perguntaAtual = 0;
 
     pontuacao = 0;
 
-    document.getElementById(
-        "resultScreen"
-    ).style.display = "none";
+    // Esconde a tela de resultado
+    document.getElementById("resultScreen").style.display = "none";
 
-    document.getElementById(
-        "startScreen"
-    ).style.display = "block";
+    // Recarrega as próximas perguntas (a rotação já é incrementada em mostrarResultado)
+    await carregarPerguntas();
+
+    // Inicia o quiz imediatamente com o novo conjunto
+    startQuiz();
 }
 
 

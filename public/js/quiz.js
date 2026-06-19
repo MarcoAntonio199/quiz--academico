@@ -364,18 +364,17 @@ function incrementarRotacao(disciplinaId, usadasCount) {
 
 async function restartQuiz() {
 
-    perguntaAtual = 0;
-
     pontuacao = 0;
 
-    // Esconde a tela de resultado
-    document.getElementById("resultScreen").style.display = "none";
+   document.getElementById(
+        "resultScreen"
+    ).style.display = "none";
 
-    // Recarrega as próximas perguntas (a rotação já é incrementada em mostrarResultado)
-    await carregarPerguntas();
-
-    // Inicia o quiz imediatamente com o novo conjunto
-    startQuiz();
+    document.getElementById(
+        "startScreen"
+    ).style.display = "block";
+    window.location.href = "/modulo";
+    
 }
 
 

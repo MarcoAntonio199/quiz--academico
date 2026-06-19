@@ -28,7 +28,7 @@ export async function salvarPontuacao(
 
         UPDATE usuario
 
-        SET pontuacao = pontuacao + ?
+       SET pontuacao = ?
 
         WHERE nome = ?
 

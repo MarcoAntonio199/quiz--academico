@@ -20,6 +20,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 // Arquivos estáticos
   // app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(process.cwd(), "views")));

@@ -23,7 +23,7 @@ export async function salvarPontuacao(
     nome,
     pontos
 ) {
-
+// 
     await pool.query(`
 
         UPDATE usuario
